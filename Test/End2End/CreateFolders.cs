@@ -26,12 +26,11 @@ namespace Test.End2End
 			const string vocabularyTableName = "Parrot Words";
 
 			Browser.Navigate().GoToUrl("http://localhost:57143");
-			Browser.Url.Should().Be("http://localhost:57143/login");
+			Browser.Url.Should().Be("http://localhost:57143/login?returnUrl=/");
 
 			Browser.FindElementByName("username").SendKeys("CrazyParrot");
 			Browser.FindElementByName("password").SendKeys("parroty_pass");
-			Browser.FindElementByName("submitLogin").Click();
-			Browser.Url.Should().Be("http://localhost:57143");
+			Browser.FindElementByTagName("form").Submit();
 
 			Browser.FindElementByCssSelector("#workspace #vocabulary .add").Click();
 			Browser.FindElementByName("vocabulary-table-title").SendKeys(vocabularyTableName);

@@ -1,16 +1,22 @@
 ﻿using Nancy;
+using Nancy.Authentication.Forms;
+using Nancy.Bootstrapper;
 using Nancy.Conventions;
+using Nancy.TinyIoc;
 
 
 namespace Controller
 {
 	public class Bootstrapper : DefaultNancyBootstrapper
 	{
-		protected override void ConfigureConventions(NancyConventions nancyConventions)
+		protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
 		{
-			base.ConfigureConventions(nancyConventions);
-
-			nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory("dist", "app/dist"));
+			base.RequestStartup(container, pipelines, context);
+			FormsAuthentication.Enable(pipelines, new FormsAuthenticationConfiguration
+			{
+				RedirectUrl = "/login",
+				UserMapper = new NancyUserMapper()
+			});
 		}
 	}
 }

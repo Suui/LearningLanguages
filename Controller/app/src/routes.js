@@ -1,14 +1,15 @@
 import React from 'react';
-import {Route, IndexRoute} from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 import App from './components/App';
+import AppLayout from './components/AppLayout';
 import HomePage from './components/home/HomePage';
-import AboutPage from './components/about/AboutPage';
-import CoursesPage from './components/course/CoursesPage';
+import LoginPage from './components/login/LoginPage';
 
 export default (
-	<Route path="/" component={App}>
-		<IndexRoute component={HomePage}/>
-		<Route path="courses" component={CoursesPage}/>
-		<Route path="about" component={AboutPage}/>
+	<Route component={App}>
+		<Route path="/login" component={LoginPage}/>
+		<Route path="/" component={AppLayout}>
+			<IndexRoute component={HomePage}/>
+		</Route>
 	</Route>
 );

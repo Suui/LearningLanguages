@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{F63192FC-595F-426B-8DC2-114CE3ABCAD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{9D675AF7-FBEA-4AA3-8328-098296585522}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{E71B97E6-EAC6-4788-AE4D-77B61BA515F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{F63192FC-595F-426B-8DC2-114CE3ABCAD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F63192FC-595F-426B-8DC2-114CE3ABCAD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F63192FC-595F-426B-8DC2-114CE3ABCAD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D675AF7-FBEA-4AA3-8328-098296585522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D675AF7-FBEA-4AA3-8328-098296585522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D675AF7-FBEA-4AA3-8328-098296585522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D675AF7-FBEA-4AA3-8328-098296585522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E71B97E6-EAC6-4788-AE4D-77B61BA515F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71B97E6-EAC6-4788-AE4D-77B61BA515F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71B97E6-EAC6-4788-AE4D-77B61BA515F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71B97E6-EAC6-4788-AE4D-77B61BA515F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
