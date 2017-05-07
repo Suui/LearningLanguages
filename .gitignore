@@ -3,5 +3,6 @@ packages
 bin
 obj
 node_modules
+Content
 
 *.user
