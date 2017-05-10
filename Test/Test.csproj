@@ -68,6 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="End2End\CreateFolders.cs" />
+    <Compile Include="Helpers\TestFactory.cs" />
+    <Compile Include="Helpers\End2EndTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +78,12 @@
   <ItemGroup>
     <Folder Include="Integration\" />
     <Folder Include="Unit\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{9D675AF7-FBEA-4AA3-8328-098296585522}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

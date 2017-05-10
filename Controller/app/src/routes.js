@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './components/App';
+import LoginPage from './components/LoginPage';
 import AppLayout from './components/AppLayout';
-import HomePage from './components/home/HomePage';
-import LoginPage from './components/login/LoginPage';
+import DashboardPage from './components/DashboardPage';
 
 export default (
 	<Route component={App}>
 		<Route path="/login" component={LoginPage}/>
 		<Route path="/" component={AppLayout}>
-			<IndexRoute component={HomePage}/>
+			<IndexRoute component={DashboardPage}/>
 		</Route>
 	</Route>
 );
