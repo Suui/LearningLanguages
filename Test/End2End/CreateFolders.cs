@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -16,7 +17,7 @@ namespace Test.End2End
 		private static readonly By PasswordInputField = By.Name("password");
 		private static readonly By FormSubmit = By.TagName("form");
 		private static readonly By VocabularyTableSubmit = By.Name("createVocabularyTable");
-		private static readonly By VocabularyFolders = By.CssSelector(".vocabulary-folder");
+		private ReadOnlyCollection<IWebElement> TheVocabularyFolders => Browser.FindElements(By.CssSelector(".vocabulary-folder"));
 
 		[Test]
 		public void As_a_user_I_want_to_create_folders_in_the_Vocabulary_section_of_my_Workspace()
@@ -26,8 +27,7 @@ namespace Test.End2End
 			PerformLogin();
 			CreateVocabularyFolder(vocabularyFolderName);
 
-			var folders = Browser.FindElements(VocabularyFolders);
-			folders.First().Text.Should().Be(vocabularyFolderName);
+			TheVocabularyFolders.ShouldContainASingleFolderNamed(vocabularyFolderName);
 		}
 
 		private void PerformLogin()
@@ -46,6 +46,14 @@ namespace Test.End2End
 			Browser.SwitchTo().ActiveElement();
 			Browser.FindElement(VocabularyTableTitleInputField).SendKeys(vocabularyTableName);
 			Browser.FindElement(VocabularyTableSubmit).Click();
+		}
+	}
+
+	internal static class AssertionExtensions
+	{
+		public static void ShouldContainASingleFolderNamed(this ReadOnlyCollection<IWebElement> vocabularyFolders, string folderName)
+		{
+			vocabularyFolders.Single().Text.Should().Be(folderName);
 		}
 	}
 }
