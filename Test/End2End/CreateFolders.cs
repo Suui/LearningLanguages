@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
-using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium;
 using Test.Helpers;
 
 
@@ -11,6 +10,14 @@ namespace Test.End2End
 	[TestFixture]
 	class CreateFolders : End2EndTest
 	{
+		private static readonly By VocabularyTableTitleInputField = By.Name("vocabularyTableTtitle");
+		private static readonly By AddVocabularyIcon = By.Id("add-vocabulary-folder");
+		private static readonly By UsernameInputField = By.Name("username");
+		private static readonly By PasswordInputField = By.Name("password");
+		private static readonly By FormSubmit = By.TagName("form");
+		private static readonly By VocabularyTableSubmit = By.Name("createVocabularyTable");
+		private static readonly By VocabularyFolders = By.CssSelector(".vocabulary-folder");
+
 		[Test]
 		public void As_a_user_I_want_to_create_folders_in_the_Vocabulary_section_of_my_Workspace()
 		{
@@ -19,7 +26,7 @@ namespace Test.End2End
 			PerformLogin();
 			CreateVocabularyFolder(vocabularyFolderName);
 
-			var folders = Browser.FindElementsByCssSelector("#workspace #vocabulary .folder");
+			var folders = Browser.FindElements(VocabularyFolders);
 			folders.First().Text.Should().Be(vocabularyFolderName);
 		}
 
@@ -28,17 +35,17 @@ namespace Test.End2End
 			Browser.Navigate().GoToUrl($"http://localhost:{Port}");
 			Browser.Url.Should().Be($"http://localhost:{Port}/login?returnUrl=/");
 
-			Browser.FindElementByName("username").SendKeys("CrazyParrot");
-			Browser.FindElementByName("password").SendKeys("parroty_pass");
-			Browser.FindElementByTagName("form").Submit();
+			Browser.FindElement(UsernameInputField).SendKeys("CrazyParrot");
+			Browser.FindElement(PasswordInputField).SendKeys("parroty_pass");
+			Browser.FindElement(FormSubmit).Submit();
 		}
 
 		private void CreateVocabularyFolder(string vocabularyTableName)
 		{
-			Browser.FindElementById("add-vocabulary-folder").Click();
+			Browser.FindElement(AddVocabularyIcon).Click();
 			Browser.SwitchTo().ActiveElement();
-			Browser.FindElementByName("vocabulary-table-title").SendKeys(vocabularyTableName);
-			Browser.FindElementByName("create-vocabulary-table").Click();
+			Browser.FindElement(VocabularyTableTitleInputField).SendKeys(vocabularyTableName);
+			Browser.FindElement(VocabularyTableSubmit).Click();
 		}
 	}
 }
