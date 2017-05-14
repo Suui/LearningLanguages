@@ -1,4 +1,4 @@
-const should = require('chai').should();
+require('chai').should();
 
 describe('dummy', () => {
 
