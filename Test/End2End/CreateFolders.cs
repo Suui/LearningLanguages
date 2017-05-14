@@ -11,12 +11,12 @@ namespace Test.End2End
 	[TestFixture]
 	class CreateFolders : End2EndTest
 	{
-		private static readonly By VocabularyTableTitleInputField = By.Name("vocabularyTableTtitle");
-		private static readonly By AddVocabularyIcon = By.Id("add-vocabulary-folder");
 		private static readonly By UsernameInputField = By.Name("username");
 		private static readonly By PasswordInputField = By.Name("password");
 		private static readonly By FormSubmit = By.TagName("form");
-		private static readonly By VocabularyTableSubmit = By.Name("createVocabularyTable");
+		private static readonly By AddVocabularyFolderIcon = By.Id("add-vocabulary-folder");
+		private static readonly By VocabularyFolderNameInputField = By.Name("vocabularyFolderName");
+		private static readonly By VocabularyTableSubmit = By.Name("createVocabularyFolder");
 		private ReadOnlyCollection<IWebElement> TheVocabularyFolders => Browser.FindElements(By.CssSelector(".vocabulary-folder"));
 
 		[Test]
@@ -42,9 +42,9 @@ namespace Test.End2End
 
 		private void CreateVocabularyFolder(string vocabularyTableName)
 		{
-			Browser.FindElement(AddVocabularyIcon).Click();
+			Browser.FindElement(AddVocabularyFolderIcon).Click();
 			Browser.SwitchTo().ActiveElement();
-			Browser.FindElement(VocabularyTableTitleInputField).SendKeys(vocabularyTableName);
+			Browser.FindElement(VocabularyFolderNameInputField).SendKeys(vocabularyTableName);
 			Browser.FindElement(VocabularyTableSubmit).Click();
 		}
 	}
