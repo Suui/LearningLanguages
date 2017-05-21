@@ -21,6 +21,7 @@ namespace Test.Helpers
 			LaunchWebApp();
 			SetupWebDriver();
 			Browser = new ChromeDriver();
+			Browser.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(50);
 		}
 
 		[TearDown]
