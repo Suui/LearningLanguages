@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "React",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceRoot}",
+            "userDataDir": "${workspaceRoot}/.vscode/chrome",
+            "sourceMaps": true,
+            "smartStep": true,
+            "internalConsoleOptions": "openOnSessionStart",
+            "skipFiles": [
+                "node_modules/**"
+            ],
+            "sourceMapPathOverrides": {
+                "webpack:///*": "${webRoot}/*"
+            },
+            "runtimeArgs": [
+                "--disable-session-crashed-bubble",
+                "--disable-infobars"
+            ]
+        }
+    ]
+}
