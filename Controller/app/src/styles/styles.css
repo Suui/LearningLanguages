@@ -57,7 +57,3 @@ nav {
 .workspace .add-vocabulary-folder :active {
 	fill: rgba(255, 0, 0, 0.7);
 }
-
-.workspace .set-vocabulary-folder-name {
-	display: none;
-}
