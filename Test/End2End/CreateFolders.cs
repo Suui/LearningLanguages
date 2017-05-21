@@ -43,7 +43,6 @@ namespace Test.End2End
 		private void CreateVocabularyFolder(string vocabularyTableName)
 		{
 			Browser.FindElement(AddVocabularyFolderIcon).Click();
-			Browser.SwitchTo().ActiveElement();
 			Browser.FindElement(VocabularyFolderNameInputField).SendKeys(vocabularyTableName);
 			Browser.FindElement(VocabularyTableSubmit).Click();
 		}
