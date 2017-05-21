@@ -6,3 +6,6 @@ node_modules
 Content
 
 *.user
+
+Controller/app/.vscode/**
+!Controller/app/.vscode/launch.json
