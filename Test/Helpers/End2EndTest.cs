@@ -25,7 +25,7 @@ namespace Test.Helpers
 		}
 
 		[TearDown]
-		public void cleanup()
+		public void Cleanup()
 		{
 			KillWebApp();
 			Browser.Quit();
