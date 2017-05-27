@@ -19,7 +19,7 @@ browserSync({
   ui: {
     port: 3001
   },
-  browser: "google chrome",
+  browser: "chrome",
   server: {
     baseDir: 'src',
 
