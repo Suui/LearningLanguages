@@ -6,8 +6,10 @@ import { Provider } from 'react-redux';
 import routes from './routes';
 import configureStore from './store/configureStore';
 import './styles/styles.css';
+import { retrieveVocabularyFolders } from './actions/workspaceActions';
 
 const store = configureStore();
+store.dispatch(retrieveVocabularyFolders());
 
 render(
 	<Provider store={store}>

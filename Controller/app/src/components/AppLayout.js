@@ -25,6 +25,11 @@ class AppLayout extends React.Component {
 		this.setState(nextState);
 	}
 
+	hideFolderCreation() {
+		const nextState = Object.assign({}, this.state, { displayFolderCreation: false });
+		this.setState(nextState);
+	}
+
 	setupVocabularyFolderName(event) {
 		const currentFolderName = event.target.value;
 		const nextState = Object.assign({}, this.state, { newVocabularyFolderName: currentFolderName });
@@ -32,7 +37,8 @@ class AppLayout extends React.Component {
 	}
 
 	createVocabularyFolder() {
-		this.props.dispatch(workspaceActions.createVocabularyFolder(this.state.newVocabularyFolderName));
+		this.props.createVocabularyFolder(this.state.newVocabularyFolderName);
+		this.hideFolderCreation();
 	}
 
 	folderCreationForm() {
@@ -40,7 +46,7 @@ class AppLayout extends React.Component {
 			return (
 				<div>
 					<input type="text" name="vocabularyFolderName" onChange={this.setupVocabularyFolderName}/>
-					<input type="submit" value="Create" onClick={this.createVocabularyFolder}/>
+					<input type="submit" name="createVocabularyFolder" value="Create" onClick={this.createVocabularyFolder}/>
 				</div>
 			);
 		}
@@ -49,8 +55,8 @@ class AppLayout extends React.Component {
 
 	vocabularyFolders() {
 		if (this.props.workspace && this.props.workspace.vocabularyFolders) {
-			return this.props.workspace.vocabularyFolders.map((folderName, index) => {
-				return <div className="vocabulary-folder" key={index}>{folderName}</div>;
+			return this.props.workspace.vocabularyFolders.map((folder, index) => {
+				return <div className="vocabulary-folder" key={folder.id}>{folder.name}</div>;
 			});
 		}
 	}
@@ -86,7 +92,8 @@ class AppLayout extends React.Component {
 
 AppLayout.propTypes = {
 	workspace: PropTypes.object.isRequired,
-	dispatch: PropTypes.func.isRequired
+	createVocabularyFolder: PropTypes.func.isRequired,
+	// createVocabularyFolderAsync: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
@@ -95,10 +102,10 @@ function mapStateToProps(state, ownProps) {
 	};
 }
 
-// function mapDispatchToProps(dispatch) {
-// 	return {
-// 		workspace: folderName => dispatch(workspaceActions.createVocabularyFolder(folderName))
-// 	};
-// }
+function mapDispatchToProps(dispatch) {
+	return {
+		createVocabularyFolder: folderName => dispatch(workspaceActions.createVocabularyFolder(folderName))
+	};
+}
 
-export default connect(mapStateToProps/*, mapDispatchToProps*/)(AppLayout);
+export default connect(mapStateToProps, mapDispatchToProps)(AppLayout);
