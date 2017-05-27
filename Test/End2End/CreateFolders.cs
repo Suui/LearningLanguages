@@ -16,7 +16,7 @@ namespace Test.End2End
 		private static readonly By FormSubmit = By.TagName("form");
 		private static readonly By AddVocabularyFolderIcon = By.Id("add-vocabulary-folder");
 		private static readonly By VocabularyFolderNameInputField = By.Name("vocabularyFolderName");
-		private static readonly By VocabularyTableSubmit = By.Name("createVocabularyFolder");
+		private static readonly By VocabularyFolderSubmit = By.Name("createVocabularyFolder");
 		private ReadOnlyCollection<IWebElement> TheVocabularyFolders => Browser.FindElements(By.CssSelector(".vocabulary-folder"));
 
 		[Test]
@@ -44,7 +44,7 @@ namespace Test.End2End
 		{
 			Browser.FindElement(AddVocabularyFolderIcon).Click();
 			Browser.FindElement(VocabularyFolderNameInputField).SendKeys(vocabularyTableName);
-			Browser.FindElement(VocabularyTableSubmit).Click();
+			Browser.FindElement(VocabularyFolderSubmit).Click();
 		}
 	}
 
