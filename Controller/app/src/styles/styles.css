@@ -57,3 +57,7 @@ nav {
 .workspace .add-vocabulary-folder :active {
 	fill: rgba(255, 0, 0, 0.7);
 }
+
+.workspace .vocabulary-folder {
+	padding: 2px 0 2px 10px;
+}
