@@ -1,12 +1,14 @@
+import * as types from '../actions/types/workspace';
+
 export default function workspaceReducer(workspace = {}, action) {
-    if (action.type == 'VOCABULARY_FOLDER_CREATED') {
+    if (action.type == types.VOCABULARY_FOLDER_CREATED) {
         return vocabularyFolderCreated(workspace, action);
     }
-    if (action.type == 'VOCABULARY_FOLDERS_RETRIEVED') {
+    if (action.type == types.VOCABULARY_FOLDERS_RETRIEVED) {
         return vocabularyFoldersRetrieved(workspace, action);
     }
     switch (action.type) {
-        case 'CREATE_VOCABULARY_FOLDER':
+        case types.CREATE_VOCABULARY_FOLDER:
             if (workspace.vocabularyFolders) {
                 const vocabularyFolders = [...workspace.vocabularyFolders, action.folderName];
                 return Object.assign({}, workspace, { vocabularyFolders });

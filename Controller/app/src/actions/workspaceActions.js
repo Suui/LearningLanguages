@@ -1,19 +1,20 @@
+import * as types from './types/workspace';
 import * as workspaceApi from '../api/workspaceApi';
 
 export function displayVocabularyFolderCreation(displayed) {
-    return { type: 'DISPLAY_VOCABULARY_FOLDER_CREATION', displayed };
+    return { type: types.DISPLAY_VOCABULARY_FOLDER_CREATION, displayed };
 }
 
 export function createVocabularyFolder(folderName) {
-    return { type: 'CREATE_VOCABULARY_FOLDER', folderName };
+    return { type: types.CREATE_VOCABULARY_FOLDER, folderName };
 }
 
 export function vocabularyFolderCreated(folder) {
-    return { type: 'VOCABULARY_FOLDER_CREATED', folder };
+    return { type: types.VOCABULARY_FOLDER_CREATED, folder };
 }
 
 export function vocabularyFoldersRetrieved(folders) {
-    return { type: 'VOCABULARY_FOLDERS_RETRIEVED', folders };
+    return { type: types.VOCABULARY_FOLDERS_RETRIEVED, folders };
 }
 
 export function createVocabularyFolderAsync(folderName) {
