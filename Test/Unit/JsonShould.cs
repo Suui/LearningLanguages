@@ -3,9 +3,6 @@ using Controller;
 using FluentAssertions;
 using NUnit.Framework;
 
-/* TODO
-	
-*/
 
 namespace Test.Unit
 {
