@@ -93,15 +93,13 @@
     <Compile Include="Helpers\TestFactory.cs" />
     <Compile Include="Helpers\End2EndTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unit\CreateVocabularyFolderShould.cs" />
+    <Compile Include="Integration\WorkspaceActionsShould.cs" />
     <Compile Include="Unit\JsonShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Integration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Controller\Controller.csproj">
       <Project>{ed638dd5-e755-4b7a-940d-5c94ab425686}</Project>

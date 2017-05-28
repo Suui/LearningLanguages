@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System.Collections.Generic;
+using Domain;
 using MongoDB.Driver;
 
 
@@ -17,6 +18,12 @@ namespace Persistence
 		{
 			var folderCollection = Database.GetCollection<Folder>("folders");
 			folderCollection.InsertOne(folder);
+		}
+
+		public List<Folder> RetrieveAllVocabularyFolders()
+		{
+			var folderCollection = Database.GetCollection<Folder>("folders");
+			return folderCollection.Find(folder => true).ToList();
 		}
 	}
 }
