@@ -1,6 +1,6 @@
 import * as types from '../actions/types/workspace';
 
-export default function workspaceReducer(workspace = {}, action) {
+export default function workspaceReducer(workspace = { vocabularyFolders: [] }, action) {
     if (action.type == types.VOCABULARY_FOLDER_CREATED) {
         return vocabularyFolderCreated(workspace, action);
     }

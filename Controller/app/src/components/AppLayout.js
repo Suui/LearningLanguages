@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { TiFolderAdd } from 'react-icons/lib/ti';
 import { Link } from 'react-router';
+import Workspace from './Workspace';
 import * as workspaceActions from '../actions/workspaceActions';
 
 class AppLayout extends React.Component {
@@ -41,45 +42,19 @@ class AppLayout extends React.Component {
 		this.hideFolderCreation();
 	}
 
-	folderCreationForm() {
-		if (this.state.displayFolderCreation) {
-			return (
-				<div>
-					<input type="text" name="vocabularyFolderName" onChange={this.setupVocabularyFolderName}/>
-					<input type="submit" name="createVocabularyFolder" value="Create" onClick={this.createVocabularyFolder}/>
-				</div>
-			);
-		}
-		return null;
-	}
-
-	vocabularyFolders() {
-		if (this.props.workspace && this.props.workspace.vocabularyFolders) {
-			return this.props.workspace.vocabularyFolders.map((folder, index) => {
-				return <div className="vocabulary-folder" key={folder.id}>{folder.name}</div>;
-			});
-		}
-	}
-
 	render() {
 		return (
 			<div>
 				<nav>
 					Workspace
 				</nav>
-				<div className="workspace">
-					<div className="root">
-						Workspace
-					</div>
-					<div className="vocabulary">
-						Vocabulary
-						<Link to="/" onClick={this.displayFolderCreation} id="add-vocabulary-folder" className="add-vocabulary-folder">
-							<TiFolderAdd/>
-						</Link>
-					</div>
-					{this.folderCreationForm()}
-					{this.vocabularyFolders()}
-				</div>
+				<Workspace
+					vocabularyFolders={this.props.workspace.vocabularyFolders}
+					displayVocabularyFolderCreation={this.displayFolderCreation}
+					vocabularyFolderCreationDisplayed={this.state.displayFolderCreation}
+					vocabularyFolderNameChanged={this.setupVocabularyFolderName}
+					createVocabularyFolder={this.createVocabularyFolder}
+				/>
 				<Grid>
 					<Row>
 						<Col/>
