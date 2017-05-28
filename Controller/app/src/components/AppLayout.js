@@ -67,8 +67,7 @@ class AppLayout extends React.Component {
 
 AppLayout.propTypes = {
 	workspace: PropTypes.object.isRequired,
-	createVocabularyFolder: PropTypes.func.isRequired,
-	// createVocabularyFolderAsync: PropTypes.func.isRequired
+	createVocabularyFolder: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
