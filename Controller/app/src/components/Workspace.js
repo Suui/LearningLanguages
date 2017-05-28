@@ -26,8 +26,8 @@ const Workspace = ({
 					<input type="text" name="vocabularyFolderName" onChange={vocabularyFolderNameChanged}/>
 					<input type="submit" name="createVocabularyFolder" value="Create" onClick={createVocabularyFolder}/>
 				</div>}
-            {vocabularyFolders.map((folder) => {
-				return <div className="vocabulary-folder" key={folder.id}>{folder.name}</div>;
+            {vocabularyFolders.map((folder, index) => {
+				return <div className="vocabulary-folder" key={index}>{folder.name}</div>;
 			})}
         </div>
     );
