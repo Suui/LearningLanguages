@@ -31,7 +31,7 @@ namespace Persistence
 
 		public User RetrieveUserWith(Guid id)
 		{
-			throw new NotImplementedException();
+			return UserCollection.Find(user => user.Id == id).ToList().Single();
 		}
 	}
 }
