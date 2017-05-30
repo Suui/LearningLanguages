@@ -1,5 +1,4 @@
 ﻿using System;
-using Domain;
 using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Security;
@@ -12,8 +11,9 @@ namespace Controller
 	{
 		public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
 		{
-			var userService = new UserService(new InMemoryUserRepository());
-			return new NancyUserIdentity { UserName = userService.GetUsernameFrom(identifier) };
+			var userRepository = PersistenceFactory.UserRepository();
+			var username = userRepository.RetrieveUserWith(identifier).Name;
+			return new NancyUserIdentity { UserName = username };
 		}
 	}
 }

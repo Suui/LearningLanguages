@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
+using Domain;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -11,6 +13,8 @@ namespace Test.End2End
 	[TestFixture]
 	class CreateFolders : End2EndTest
 	{
+		private const string Username = "Parrot";
+		private const string Password = "wtf";
 		private static readonly By UsernameInputField = By.Name("username");
 		private static readonly By PasswordInputField = By.Name("password");
 		private static readonly By FormSubmit = By.TagName("form");
@@ -23,6 +27,7 @@ namespace Test.End2End
 		public void As_a_user_I_want_to_create_folders_in_the_Vocabulary_section_of_my_Workspace()
 		{
 			const string vocabularyFolderName = "Parrot Words";
+			GivenAUser();
 
 			PerformLogin();
 			CreateVocabularyFolder(vocabularyFolderName);
@@ -30,13 +35,25 @@ namespace Test.End2End
 			TheVocabularyFolders.ShouldContainASingleFolderNamed(vocabularyFolderName);
 		}
 
+		private void GivenAUser()
+		{
+			var userCollection = TestDatabase.GetCollection<User>("users");
+			userCollection.InsertOne(new User
+			(
+				id: Guid.NewGuid(),
+				email: "user@email.com",
+				name: Username,
+				password: Password
+			));
+		}
+
 		private void PerformLogin()
 		{
 			Browser.Navigate().GoToUrl($"http://localhost:{Port}");
 			Browser.Url.Should().Be($"http://localhost:{Port}/login?returnUrl=/");
 
-			Browser.FindElement(UsernameInputField).SendKeys("CrazyParrot");
-			Browser.FindElement(PasswordInputField).SendKeys("parroty_pass");
+			Browser.FindElement(UsernameInputField).SendKeys(Username);
+			Browser.FindElement(PasswordInputField).SendKeys(Password);
 			Browser.FindElement(FormSubmit).Submit();
 		}
 

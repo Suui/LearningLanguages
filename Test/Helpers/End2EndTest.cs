@@ -9,7 +9,7 @@ using WebDriverManager.DriverConfigs.Impl;
 
 namespace Test.Helpers
 {
-	public class End2EndTest
+	public class End2EndTest : MongoTest
 	{
 		protected ChromeDriver Browser;
 		protected const int Port = 5050;

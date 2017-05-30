@@ -57,8 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InMemoryUserRepository.cs" />
+    <Compile Include="MongoUserRepository.cs" />
     <Compile Include="MongoWorkspaceRepository.cs" />
+    <Compile Include="PersistenceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ namespace Controller.Routes
 	{
 		public LoginModule() : base("/login")
 		{
-			var userService = new UserService(new InMemoryUserRepository());
+			var userService = new UserService(PersistenceFactory.UserRepository());
 
 			Get["/"] = _ => View["index"];
 
