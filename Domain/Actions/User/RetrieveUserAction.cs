@@ -1,4 +1,7 @@
-﻿namespace Domain
+﻿using Domain.Repositories;
+
+
+namespace Domain.Actions.User
 {
 	public class RetrieveUserAction
 	{
@@ -9,7 +12,7 @@
 			UserRepository = userRepository;
 		}
 
-		public User Execute(string username)
+		public Domain.User Execute(string username)
 		{
 			return UserRepository.RetrieveUserWith(username);
 		}

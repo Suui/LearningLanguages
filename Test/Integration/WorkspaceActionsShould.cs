@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain;
+using Domain.Actions;
+using Domain.Actions.Workspace;
 using FluentAssertions;
 using MongoDB.Driver;
 using NUnit.Framework;

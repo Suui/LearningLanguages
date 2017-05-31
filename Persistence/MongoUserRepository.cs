@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Domain;
+using Domain.Repositories;
 using MongoDB.Driver;
 
 namespace Persistence
@@ -14,14 +15,9 @@ namespace Persistence
 			UserCollection = database.GetCollection<User>("users");
 		}
 
-		public Guid GetUserGuid(string username, string password)
+		public User RetrieveUserWith(Guid userId)
 		{
-			throw new NotImplementedException();
-		}
-
-		public string GetUsernameFrom(Guid identifier)
-		{
-			throw new NotImplementedException();
+			return UserCollection.Find(user => user.Id == userId).ToList().Single();
 		}
 
 		public User RetrieveUserWith(string username)
@@ -29,9 +25,13 @@ namespace Persistence
 			return UserCollection.Find(user => user.Name == username).ToList().Single();
 		}
 
-		public User RetrieveUserWith(Guid id)
+		public Guid RetrieveUserIdFor(string username, string password)
 		{
-			return UserCollection.Find(user => user.Id == id).ToList().Single();
+			var matchingUsers = UserCollection.Find(user => user.Name == username && user.Password == password).ToList();
+			if (matchingUsers.Count == 1)
+				return matchingUsers.Single().Id;
+
+			return Guid.Empty;
 		}
 	}
 }

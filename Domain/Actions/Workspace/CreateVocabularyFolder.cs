@@ -1,7 +1,8 @@
 ﻿using System;
+using Domain.Repositories;
 
 
-namespace Domain
+namespace Domain.Actions.Workspace
 {
 	public class CreateVocabularyFolder
 	{

@@ -6,11 +6,11 @@ namespace Domain
 	public class User
 	{
 		public Guid Id { get; }
-		public string Email { get; }
 		public string Name { get; }
 		public string Password { get; }
+		public string Email { get; }
 
-		public User(Guid id, string email, string name, string password)
+		public User(Guid id, string name, string password, string email)
 		{
 			Id = id;
 			Email = email;

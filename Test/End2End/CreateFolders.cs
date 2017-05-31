@@ -29,10 +29,34 @@ namespace Test.End2End
 			const string vocabularyFolderName = "Parrot Words";
 			GivenAUser();
 
+			BeRedirectedToTheLoginPage();
 			PerformLogin();
 			CreateVocabularyFolder(vocabularyFolderName);
 
 			TheVocabularyFolders.ShouldContainASingleFolderNamed(vocabularyFolderName);
+		}
+
+		private void BeRedirectedToTheLoginPage()
+		{
+			Browser.Navigate().GoToUrl($"http://localhost:{Port}");
+
+			Browser.Url.Should().Be($"http://localhost:{Port}/login?returnUrl=/");
+		}
+
+		private void PerformLogin()
+		{
+			Browser.FindElement(UsernameInputField).SendKeys(Username);
+			Browser.FindElement(PasswordInputField).SendKeys(Password);
+			Browser.FindElement(FormSubmit).Submit();
+
+			Browser.Url.Should().Be($"http://localhost:{Port}/login?returnUrl=/");
+		}
+
+		private void CreateVocabularyFolder(string vocabularyTableName)
+		{
+			Browser.FindElement(AddVocabularyFolderIcon).Click();
+			Browser.FindElement(VocabularyFolderNameInputField).SendKeys(vocabularyTableName);
+			Browser.FindElement(VocabularyFolderSubmit).Click();
 		}
 
 		private void GivenAUser()
@@ -41,27 +65,10 @@ namespace Test.End2End
 			userCollection.InsertOne(new User
 			(
 				id: Guid.NewGuid(),
-				email: "user@email.com",
 				name: Username,
-				password: Password
+				password: Password,
+				email: "user@email.com"
 			));
-		}
-
-		private void PerformLogin()
-		{
-			Browser.Navigate().GoToUrl($"http://localhost:{Port}");
-			Browser.Url.Should().Be($"http://localhost:{Port}/login?returnUrl=/");
-
-			Browser.FindElement(UsernameInputField).SendKeys(Username);
-			Browser.FindElement(PasswordInputField).SendKeys(Password);
-			Browser.FindElement(FormSubmit).Submit();
-		}
-
-		private void CreateVocabularyFolder(string vocabularyTableName)
-		{
-			Browser.FindElement(AddVocabularyFolderIcon).Click();
-			Browser.FindElement(VocabularyFolderNameInputField).SendKeys(vocabularyTableName);
-			Browser.FindElement(VocabularyFolderSubmit).Click();
 		}
 	}
 

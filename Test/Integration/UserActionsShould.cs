@@ -1,5 +1,7 @@
 ﻿using System;
 using Domain;
+using Domain.Actions;
+using Domain.Actions.User;
 using FluentAssertions;
 using NUnit.Framework;
 using Persistence;
@@ -12,6 +14,20 @@ namespace Test.Integration
 	public class UserActionsShould : MongoTest
 	{
 		private const string Username = "Parroty McParrot";
+		private const string Password = "parroty_pass";
+		private Guid UserId { get; } = Guid.NewGuid();
+
+		[Test]
+		public void validate_a_user_given_his_username_and_password()
+		{
+			GivenAUser();
+
+			var validated = new ValidateUserAction(new MongoUserRepository(TestDatabase)).Execute(Username, Password);
+			validated.Should().BeTrue();
+
+			validated = new ValidateUserAction(new MongoUserRepository(TestDatabase)).Execute(Username, "wrong_password");
+			validated.Should().BeFalse();
+		}
 
 		[Test]
 		public void retrieve_a_user_given_his_username()
@@ -20,7 +36,7 @@ namespace Test.Integration
 
 			var user = new RetrieveUserAction(new MongoUserRepository(TestDatabase)).Execute(Username);
 
-			user.Name.Should().Be(Username);
+			user.Id.Should().Be(UserId);
 		}
 
 		private void GivenAUser()
@@ -28,11 +44,9 @@ namespace Test.Integration
 			var userCollection = TestDatabase.GetCollection<User>("users");
 			userCollection.InsertOne(new User
 			(
-				id: Guid.NewGuid(),
-				email: "user@email.com",
+				id: UserId,
 				name: Username,
-				password: "parroty_pass"
-			));
+				password: Password, email: "parroty@email.com"));
 		}
 	}
 }

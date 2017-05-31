@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace Domain
+namespace Domain.Repositories
 {
 	public interface WorkspaceRepository
 	{

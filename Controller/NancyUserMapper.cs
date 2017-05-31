@@ -12,8 +12,8 @@ namespace Controller
 		public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
 		{
 			var userRepository = PersistenceFactory.UserRepository();
-			var username = userRepository.RetrieveUserWith(identifier).Name;
-			return new NancyUserIdentity { UserName = username };
+			var user = userRepository.RetrieveUserWith(identifier);
+			return new NancyUserIdentity { UserName = user.Name };
 		}
 	}
 }

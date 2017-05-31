@@ -41,16 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateVocabularyFolder.cs" />
+    <Compile Include="Actions\Workspace\CreateVocabularyFolder.cs" />
     <Compile Include="Folder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RetrieveUserAction.cs" />
-    <Compile Include="RetrieveVocabularyFolders.cs" />
+    <Compile Include="Actions\User\RetrieveUserAction.cs" />
+    <Compile Include="Actions\Workspace\RetrieveVocabularyFolders.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UserRepository.cs" />
-    <Compile Include="UserService.cs" />
-    <Compile Include="WorkspaceRepository.cs" />
-    <Compile Include="WorkspaceService.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Actions\User\ValidateUserAction.cs" />
+    <Compile Include="Repositories\WorkspaceRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
