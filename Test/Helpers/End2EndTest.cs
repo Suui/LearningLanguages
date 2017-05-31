@@ -12,7 +12,7 @@ namespace Test.Helpers
 	public class End2EndTest : MongoTest
 	{
 		protected ChromeDriver Browser;
-		protected const int Port = 5050;
+		protected const int Port = 18080;
 		private Process Process { get; set; }
 
 		[SetUp]

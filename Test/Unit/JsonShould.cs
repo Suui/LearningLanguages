@@ -13,7 +13,7 @@ namespace Test.Unit
 		public void deserialize_primitives()
 		{
 			var json = Json.Parse("{\"number\": 1}");
-
+			
 			Json.Deserialize<int>(json["number"]).Should().Be(1);
 		}
 

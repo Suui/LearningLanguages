@@ -1,6 +1,4 @@
 ﻿using System;
-using Domain;
-using Domain.Actions;
 using Domain.Actions.User;
 using Nancy;
 using Nancy.Authentication.Forms;

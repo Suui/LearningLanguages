@@ -49,7 +49,7 @@ namespace Test.End2End
 			Browser.FindElement(PasswordInputField).SendKeys(Password);
 			Browser.FindElement(FormSubmit).Submit();
 
-			Browser.Url.Should().Be($"http://localhost:{Port}/login?returnUrl=/");
+			Browser.Url.Should().Be($"http://localhost:{Port}/");
 		}
 
 		private void CreateVocabularyFolder(string vocabularyTableName)
