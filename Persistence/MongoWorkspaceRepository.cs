@@ -10,26 +10,30 @@ namespace Persistence
 {
 	public class MongoWorkspaceRepository : WorkspaceRepository
 	{
-		private IMongoDatabase Database { get; }
+		private IMongoCollection<FolderDocument> FolderCollection { get; }
 
 		public MongoWorkspaceRepository(IMongoDatabase database)
 		{
-			Database = database;
+			FolderCollection = database.GetCollection<FolderDocument>("folders");
 		}
 
-		public void Create(Folder folder, Guid vocabularyFolderId, User user)
+		public void Create(Folder folder, User user)
 		{
-			var folderCollection = Database.GetCollection<FolderDocument>("folders");
-			folderCollection.InsertOne(folder.AsFolderDocument(vocabularyFolderId, user));
+			FolderCollection.InsertOne(folder.AsFolderDocument(VocabularyFolder().Id, user));
 		}
 
 		public List<Folder> RetrieveAllTheVocabularyFoldersOfThe(User user)
 		{
-			var folderCollection = Database.GetCollection<FolderDocument>("folders");
-			var vocabularyFolder = folderCollection.Find(folder => folder.ParentFolderId == Guid.Empty
-																&& folder.Name.Equals("Vocabulary")).Single();
-			return folderCollection.Find(folder => folder.ParentFolderId == vocabularyFolder.Id)
-								   .ToList().Select(folder => folder.AsFolder()).ToList();
+			return FolderCollection.Find(folder => folder.ParentFolderId == VocabularyFolder().Id)
+								   .ToList()
+								   .Select(folder => folder.AsFolder())
+								   .ToList();
+		}
+
+		private FolderDocument VocabularyFolder()
+		{
+			return FolderCollection.Find(folder => folder.ParentFolderId == Guid.Empty
+												&& folder.Name.Equals("Vocabulary")).Single();
 		}
 	}
 }

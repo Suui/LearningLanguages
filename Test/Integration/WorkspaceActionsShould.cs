@@ -40,7 +40,7 @@ namespace Test.Integration
 			const string folderName = "Parrot Words";
 			var workspaceRepository = new MongoWorkspaceRepository(TestDatabase);
 
-			new CreateVocabularyFolder(workspaceRepository).Execute(folderName, VocabularyFolder.Id, User);
+			new CreateVocabularyFolder(workspaceRepository).Execute(folderName, User);
 
 			var folders = GetVocabularyFoldersForThe(User);
 			folders.Should().Contain(folder => folder.Name == folderName);

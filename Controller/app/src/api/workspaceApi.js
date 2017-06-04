@@ -1,11 +1,6 @@
 export function createVocabularyFolder(folderName) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve({ 
-                id: 3,
-                name: folderName
-            });
-        }, 1000);
+    return fetch({
+
     });
 }
 

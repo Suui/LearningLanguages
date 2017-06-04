@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Domain.Actions.UserActions;
+using Domain.Actions.WorkspaceActions;
 using Nancy;
 using Nancy.Extensions;
 using Nancy.Security;
@@ -21,6 +22,7 @@ namespace Controller.Routes.Api
 
 				var username = Context.CurrentUser.UserName;
 				var user = new RetrieveUserAction(PersistenceFactory.UserRepository()).Execute(username);
+				/*new CreateVocabularyFolder(PersistenceFactory.WorkspaceRepository()).Execute(folderName, );*/
 
 //				new CreateVocabularyFolder(PersistenceFactory.FolderRepository()).Execute();
 //				var folder = new RetrieveVocabularyFolder(PersistenceFactory.FolderRepository()).Execute();

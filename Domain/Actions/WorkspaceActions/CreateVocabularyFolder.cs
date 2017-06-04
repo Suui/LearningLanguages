@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Domain.Repositories;
 
 
@@ -13,10 +13,10 @@ namespace Domain.Actions.WorkspaceActions
 			WorkspaceRepository = workspaceRepository;
 		}
 
-		public void Execute(string folderName, Guid vocabularyFolderId, User user)
+		public void Execute(string folderName, User user)
 		{
 			var folder = new Folder(Guid.NewGuid(), folderName);
-			WorkspaceRepository.Create(folder, vocabularyFolderId, user);
+			WorkspaceRepository.Create(folder, user);
 		}
 	}
 }

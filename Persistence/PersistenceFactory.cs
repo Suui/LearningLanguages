@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Domain.Repositories;
 using MongoDB.Driver;
 
 
@@ -24,6 +25,11 @@ namespace Persistence
 					Database = new MongoClient().GetDatabase("learning-languages");
 			}
 			return Database;
+		}
+
+		public static WorkspaceRepository WorkspaceRepository()
+		{
+			return new MongoWorkspaceRepository(GetDatabase());
 		}
 	}
 }
