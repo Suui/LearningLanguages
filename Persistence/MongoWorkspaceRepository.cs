@@ -11,6 +11,7 @@ namespace Persistence
 	public class MongoWorkspaceRepository : WorkspaceRepository
 	{
 		private IMongoCollection<FolderDocument> FolderCollection { get; }
+		private FolderDocument LazyVocabularyFolder { get; set; }
 
 		public MongoWorkspaceRepository(IMongoDatabase database)
 		{
@@ -32,6 +33,8 @@ namespace Persistence
 
 		private FolderDocument VocabularyFolder()
 		{
+			if (LazyVocabularyFolder != null) return LazyVocabularyFolder;
+
 			return FolderCollection.Find(folder => folder.ParentFolderId == Guid.Empty
 												&& folder.Name.Equals("Vocabulary")).Single();
 		}
