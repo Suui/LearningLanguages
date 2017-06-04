@@ -11,7 +11,7 @@ namespace Persistence
 		public Guid Id { get; set; }
 		public string Name { get; set; }
 		public Guid UserId { get; set; }
-		public Guid ParentFolder { get; set; }
+		public Guid ParentFolderId { get; set; }
 	}
 
 	public static class FolderDocumentExtensions
@@ -23,11 +23,11 @@ namespace Persistence
 				Id = folder.Id,
 				Name = folder.Name,
 				UserId = user.Id,
-				ParentFolder = parentFolderId
+				ParentFolderId = parentFolderId
 			};
 		}
 
-		public static Folder AsFolder(this FolderDocument folderDocument, Folder parentFolder)
+		public static Folder AsFolder(this FolderDocument folderDocument)
 		{
 			return new Folder(folderDocument.Id, folderDocument.Name);
 		}

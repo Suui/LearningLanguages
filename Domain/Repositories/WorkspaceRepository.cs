@@ -8,6 +8,6 @@ namespace Domain.Repositories
 	{
 		void Create(Folder folder, Guid vocabularyFolderId, User user);
 
-		List<Folder> RetrieveAllVocabularyFolders();
+		List<Folder> RetrieveAllTheVocabularyFoldersOfThe(User user);
 	}
 }

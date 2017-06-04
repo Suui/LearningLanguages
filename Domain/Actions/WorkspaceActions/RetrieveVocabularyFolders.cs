@@ -13,9 +13,9 @@ namespace Domain.Actions.WorkspaceActions
 			WorkspaceRepository = workspaceRepository;
 		}
 
-		public List<Folder> execute()
+		public List<Folder> Execute(User user)
 		{
-			return WorkspaceRepository.RetrieveAllVocabularyFolders();
+			return WorkspaceRepository.RetrieveAllTheVocabularyFoldersOfThe(user);
 		}
 	}
 }

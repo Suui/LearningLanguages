@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Domain;
 using Domain.Repositories;
 using MongoDB.Driver;
@@ -22,10 +23,13 @@ namespace Persistence
 			folderCollection.InsertOne(folder.AsFolderDocument(vocabularyFolderId, user));
 		}
 
-		public List<Folder> RetrieveAllVocabularyFolders()
+		public List<Folder> RetrieveAllTheVocabularyFoldersOfThe(User user)
 		{
-			var folderCollection = Database.GetCollection<Folder>("folders");
-			return folderCollection.Find(folder => true).ToList();
+			var folderCollection = Database.GetCollection<FolderDocument>("folders");
+			var vocabularyFolder = folderCollection.Find(folder => folder.ParentFolderId == Guid.Empty
+																&& folder.Name.Equals("Vocabulary")).Single();
+			return folderCollection.Find(folder => folder.ParentFolderId == vocabularyFolder.Id)
+								   .ToList().Select(folder => folder.AsFolder()).ToList();
 		}
 	}
 }

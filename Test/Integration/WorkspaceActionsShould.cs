@@ -54,7 +54,7 @@ namespace Test.Integration
 			var secondFolder = new Folder(Guid.NewGuid(), "second");
 			GivenTwoFolders(firstFolder, secondFolder);
 
-			var folders = new RetrieveVocabularyFolders(workspaceRepository).execute();
+			var folders = new RetrieveVocabularyFolders(workspaceRepository).Execute(User);
 
 			folders.Count.Should().Be(2);
 			folders.Find(folder => folder.Id == firstFolder.Id).Name.Should().Be(firstFolder.Name);
@@ -63,15 +63,19 @@ namespace Test.Integration
 
 		private void GivenTwoFolders(Folder first, Folder second)
 		{
-			var folderCollection = TestDatabase.GetCollection<Folder>("folders");
-			folderCollection.InsertMany(new List<Folder> { first, second });
+			var folderCollection = TestDatabase.GetCollection<FolderDocument>("folders");
+			folderCollection.InsertMany(new List<FolderDocument>
+			{
+				first.AsFolderDocument(VocabularyFolder.Id, User),
+				second.AsFolderDocument(VocabularyFolder.Id, User)
+			});
 		}
 
 		private List<Folder> GetVocabularyFoldersForThe(User user)
 		{
 			var folderCollection = TestDatabase.GetCollection<FolderDocument>("folders");
 			var folderDocuments = folderCollection.Find(folder => user.Id == folder.UserId
-															   && folder.ParentFolder == VocabularyFolder.Id).ToList();
+															   && folder.ParentFolderId == VocabularyFolder.Id).ToList();
 			return folderDocuments.AsFolders(VocabularyFolder);
 		}
 
