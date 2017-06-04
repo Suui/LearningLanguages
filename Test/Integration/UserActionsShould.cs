@@ -1,7 +1,6 @@
 ﻿using System;
 using Domain;
-using Domain.Actions;
-using Domain.Actions.User;
+using Domain.Actions.UserActions;
 using FluentAssertions;
 using NUnit.Framework;
 using Persistence;
@@ -46,7 +45,8 @@ namespace Test.Integration
 			(
 				id: UserId,
 				name: Username,
-				password: Password, email: "parroty@email.com"));
+				password: Password, email: "parroty@email.com"
+			));
 		}
 	}
 }

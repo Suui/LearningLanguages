@@ -10,8 +10,8 @@ namespace Domain
 
 		public Folder(Guid id, string name)
 		{
-			Name = name;
 			Id = id;
+			Name = name;
 		}
 	}
 }

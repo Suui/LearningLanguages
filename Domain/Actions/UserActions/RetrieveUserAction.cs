@@ -1,7 +1,7 @@
 ﻿using Domain.Repositories;
 
 
-namespace Domain.Actions.User
+namespace Domain.Actions.UserActions
 {
 	public class RetrieveUserAction
 	{

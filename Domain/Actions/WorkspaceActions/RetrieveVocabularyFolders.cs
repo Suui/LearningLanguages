@@ -2,7 +2,7 @@
 using Domain.Repositories;
 
 
-namespace Domain.Actions.Workspace
+namespace Domain.Actions.WorkspaceActions
 {
 	public class RetrieveVocabularyFolders
 	{

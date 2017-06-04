@@ -2,7 +2,7 @@
 using Domain.Repositories;
 
 
-namespace Domain.Actions.Workspace
+namespace Domain.Actions.WorkspaceActions
 {
 	public class CreateVocabularyFolder
 	{
@@ -13,10 +13,10 @@ namespace Domain.Actions.Workspace
 			WorkspaceRepository = workspaceRepository;
 		}
 
-		public void execute(string folderName)
+		public void Execute(string folderName, Guid vocabularyFolderId, User user)
 		{
 			var folder = new Folder(Guid.NewGuid(), folderName);
-			WorkspaceRepository.Create(folder);
+			WorkspaceRepository.Create(folder, vocabularyFolderId, user);
 		}
 	}
 }

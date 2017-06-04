@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Domain;
 using Domain.Repositories;
 using MongoDB.Driver;
@@ -15,10 +16,10 @@ namespace Persistence
 			Database = database;
 		}
 
-		public void Create(Folder folder)
+		public void Create(Folder folder, Guid vocabularyFolderId, User user)
 		{
-			var folderCollection = Database.GetCollection<Folder>("folders");
-			folderCollection.InsertOne(folder);
+			var folderCollection = Database.GetCollection<FolderDocument>("folders");
+			folderCollection.InsertOne(folder.AsFolderDocument(vocabularyFolderId, user));
 		}
 
 		public List<Folder> RetrieveAllVocabularyFolders()

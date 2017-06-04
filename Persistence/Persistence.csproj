@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FolderDocument.cs" />
     <Compile Include="MongoUserRepository.cs" />
     <Compile Include="MongoWorkspaceRepository.cs" />
     <Compile Include="PersistenceFactory.cs" />

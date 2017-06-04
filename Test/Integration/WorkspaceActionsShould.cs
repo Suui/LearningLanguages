@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Domain;
-using Domain.Actions;
-using Domain.Actions.Workspace;
+using Domain.Actions.WorkspaceActions;
 using FluentAssertions;
 using MongoDB.Driver;
 using NUnit.Framework;
@@ -19,17 +17,33 @@ namespace Test.Integration
 	[TestFixture]
 	public class WorkspaceActionsShould : MongoTest
 	{
+		private Folder VocabularyFolder;
+		private User User { get; set; }
+
+		[SetUp]
+		public void setup()
+		{
+			User = new User
+			(
+				id: Guid.NewGuid(),
+				name: Any.String(),
+				password: Any.String(),
+				email: Any.String()
+			);
+
+			VocabularyFolder = GivenAVocabularyFolderForThe(User);
+		}
+
 		[Test]
 		public void create_a_vocabulary_folder()
 		{
 			const string folderName = "Parrot Words";
 			var workspaceRepository = new MongoWorkspaceRepository(TestDatabase);
 
-			new CreateVocabularyFolder(workspaceRepository).execute(folderName);
+			new CreateVocabularyFolder(workspaceRepository).Execute(folderName, VocabularyFolder.Id, User);
 
-			var folders = GetVocabularyFolders();
-			folders.Count.Should().Be(1);
-			folders.Single().Name.Should().Be(folderName);
+			var folders = GetVocabularyFoldersForThe(User);
+			folders.Should().Contain(folder => folder.Name == folderName);
 		}
 
 		[Test]
@@ -53,11 +67,25 @@ namespace Test.Integration
 			folderCollection.InsertMany(new List<Folder> { first, second });
 		}
 
-		private List<Folder> GetVocabularyFolders()
+		private List<Folder> GetVocabularyFoldersForThe(User user)
 		{
-			var folderCollection = TestDatabase.GetCollection<Folder>("folders");
-			var folders = folderCollection.Find(folder => true).ToList();
-			return folders;
+			var folderCollection = TestDatabase.GetCollection<FolderDocument>("folders");
+			var folderDocuments = folderCollection.Find(folder => user.Id == folder.UserId
+															   && folder.ParentFolder == VocabularyFolder.Id).ToList();
+			return folderDocuments.AsFolders(VocabularyFolder);
+		}
+
+		private Folder GivenAVocabularyFolderForThe(User user)
+		{
+			var vocabularyFolder = new Folder(
+				id: Guid.NewGuid(),
+				name: "Vocabulary"
+			);
+			var userCollection = TestDatabase.GetCollection<User>("users");
+			userCollection.InsertOne(user);
+			var folderCollection = TestDatabase.GetCollection<FolderDocument>("folders");
+			folderCollection.InsertOne(vocabularyFolder.AsFolderDocument(Guid.Empty, user));
+			return vocabularyFolder;
 		}
 	}
 }

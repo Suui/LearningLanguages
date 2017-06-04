@@ -1,7 +1,9 @@
 ﻿using System.Text;
+using Domain.Actions.UserActions;
 using Nancy;
 using Nancy.Extensions;
 using Nancy.Security;
+using Persistence;
 
 
 namespace Controller.Routes.Api
@@ -17,8 +19,11 @@ namespace Controller.Routes.Api
 				var json = Json.Parse(Request.Body.AsString());
 				var folderName = Json.Deserialize<string>(json["name"]);
 
-//				new CreateVocabularyFolder(folderName, repo).execute();
-//				var folder = new RetrieveVocabularyFolder(folderName, repo).execute();
+				var username = Context.CurrentUser.UserName;
+				var user = new RetrieveUserAction(PersistenceFactory.UserRepository()).Execute(username);
+
+//				new CreateVocabularyFolder(PersistenceFactory.FolderRepository()).Execute();
+//				var folder = new RetrieveVocabularyFolder(PersistenceFactory.FolderRepository()).Execute();
 
 //				var jsonBytes = Encoding.UTF8.GetBytes(Json.Serialize());
 //				return new Response

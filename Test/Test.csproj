@@ -76,6 +76,7 @@
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
@@ -90,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="End2End\CreateFolders.cs" />
+    <Compile Include="Helpers\Any.cs" />
     <Compile Include="Helpers\MongoTest.cs" />
     <Compile Include="Helpers\End2EndTest.cs" />
     <Compile Include="Integration\UserActionsShould.cs" />
